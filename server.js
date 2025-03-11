@@ -1,7 +1,7 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const app = express();
-const port = 3001; // Ganti ke 3001 agar tidak konflik dengan nft-buy
+const port = process.env.PORT || 3001; // Ganti ke 3001 agar tidak konflik dengan nft-buy
 
 const supabaseUrl = 'https://jmqwuaybvruzxddsppdh.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptcXd1YXlidnJ1enhkZHNwcGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0MTUxNzEsImV4cCI6MjA1NTk5MTE3MX0.ldNdOrsb4BWyFRwZUqIFEbmU0SgzJxiF_Z7eGZPKZJg';
@@ -150,5 +150,9 @@ app.post('/nft', authenticate, async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-
-app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
