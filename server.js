@@ -1,14 +1,22 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
+const path = require('path'); // Tambahkan modul path
+
 const app = express();
-const port = process.env.PORT || 3001; // Ganti ke 3001 agar tidak konflik dengan nft-buy
+const port = process.env.PORT || 3001; // Vercel akan set port otomatis
 
 const supabaseUrl = 'https://jmqwuaybvruzxddsppdh.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptcXd1YXlidnJ1enhkZHNwcGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0MTUxNzEsImV4cCI6MjA1NTk5MTE3MX0.ldNdOrsb4BWyFRwZUqIFEbmU0SgzJxiF_Z7eGZPKZJg';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// Middleware untuk parsing JSON dan melayani file statis
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public'))); // Pastikan path ke public benar
+
+// Route untuk root URL
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 const authenticate = async (req, res, next) => {
   const token = req.headers.authorization;
@@ -30,8 +38,8 @@ app.get('/nfts', async (req, res) => {
       const [desc, contact] = nft.description ? nft.description.split(' | ') : ['', 'Contact not provided'];
       return {
         ...nft,
-        description: desc || 'No description', // Keterangan
-        contact: contact || 'Contact not provided' // Kontak
+        description: desc || 'No description',
+        contact: contact || 'Contact not provided'
       };
     });
     console.log('Step 2: NFTs fetched:', nftsWithContact);
@@ -151,6 +159,4 @@ app.post('/nft', authenticate, async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+app.listen(port, () => console.log(`Server running on port ${port}`));
