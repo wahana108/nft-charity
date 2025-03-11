@@ -150,9 +150,7 @@ app.post('/nft', authenticate, async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
-});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
