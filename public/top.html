@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top Developers</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+  <h1>Top Developers</h1>
+  <a href="/index.html">Explore</a> | <a href="/dashboard.html">Dashboard</a>
+  <div id="top-list"></div>
+  <script>
+    const supabase = window.supabase.createClient('https://jmqwuaybvruzxddsppdh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptcXd1YXlidnJ1enhkZHNwcGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0MTUxNzEsImV4cCI6MjA1NTk5MTE3MX0.ldNdOrsb4BWyFRwZUqIFEbmU0SgzJxiF_Z7eGZPKZJg');
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      window.location.href = '/index.html'; // Redirect kalau belum login
+    }
+
+    async function loadTopDevelopers() {
+      const res = await fetch('/top-developers', { headers: { Authorization: token } });
+      const vendors = await res.json();
+      const list = document.getElementById('top-list');
+      vendors.forEach(v => {
+        const div = document.createElement('div');
+        div.innerHTML = `<p>${v.username} | Score: ${v.score}</p>`;
+        list.appendChild(div);
+      });
+    }
+
+    loadTopDevelopers();
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NFT Charity - Explore</title>
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net 'sha256-yCP97QDaK3N0IPMGj60YtfntFdQCNvAYcknsiRIE9xo=';">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+  <div id="login-form">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email" autocomplete="email"><br>
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password"><br>
+    <button id="login-btn">Login</button>
+    <p>Belum punya akun? <a href="#" id="show-register-link">Create Account</a></p>
+  </div>
+  <div id="register-form" style="display: none;">
+    <h2>Create Account</h2>
+    <input type="email" id="reg-email" placeholder="Email" autocomplete="email"><br>
+    <input type="password" id="reg-password" placeholder="Password" autocomplete="new-password"><br>
+    <button id="register-btn">Register</button>
+    <p>Sudah punya akun? <a href="#" id="show-login-link">Login</a></p>
+  </div>
+  <div id="explore" style="display: none;">
+    <h1>Explore NFTs</h1>
+    <nav>
+      <a href="/dashboard.html">Dashboard</a> | <button id="logout-btn">Logout</button>
+    </nav>
+    <!-- Tambahkan input pencarian -->
+    <div class="search-bar">
+      <input type="text" id="nft-search" placeholder="Search by title...">
+    </div>
+    <div id="nft-list"></div>
+  </div>
+  <script src="/script.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91e10868c807bd2d',t:'MTc0MTU5MTA1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

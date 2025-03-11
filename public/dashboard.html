@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <a href="/index.html">Explore</a>
+  <h2>Add NFT</h2>
+  <input id="title" placeholder="Title"><br>
+  <input id="description" placeholder="Description | Your Contact Email (e.g., Charity Item | email@example.com)"><br>
+  <input type="file" id="nft-image" accept="image/*"><br>
+  <button id="add-nft-btn">Add NFT</button>
+  <div id="message"></div>
+  <p><strong>Note:</strong> Masukkan keterangan dan email Anda di kolom Description dengan format "Description | email" (contoh: "Charity Item | email@example.com").</p>
+
+  <script>
+    const supabase = window.supabase.createClient('https://jmqwuaybvruzxddsppdh.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptcXd1YXlidnJ1enhkZHNwcGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0MTUxNzEsImV4cCI6MjA1NTk5MTE3MX0.ldNdOrsb4BWyFRwZUqIFEbmU0SgzJxiF_Z7eGZPKZJg');
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      window.location.href = '/index.html';
+    }
+
+    async function addNFT() {
+      try {
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value; // Pesan | email
+        const fileInput = document.getElementById('nft-image');
+        const file = fileInput.files[0];
+        let image_file = null;
+
+        if (file) {
+          console.log('Step 1: Reading image file');
+          const reader = new FileReader();
+          await new Promise((resolve) => {
+            reader.onload = () => {
+              image_file = reader.result.split(',')[1];
+              resolve();
+            };
+            reader.readAsDataURL(file);
+          });
+          console.log('Step 2: Image read as base64');
+        }
+
+        console.log('Step 3: Sending NFT to server');
+        const res = await fetch('/nft', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: token },
+          body: JSON.stringify({ title, description, image_file })
+        });
+        if (!res.ok) throw new Error(`Add NFT failed: ${res.status}`);
+        console.log('Step 4: NFT added successfully');
+        document.getElementById('message').textContent = 'NFT added successfully!';
+      } catch (error) {
+        console.error('Error adding NFT:', error.message);
+        document.getElementById('message').textContent = 'Error: ' + error.message;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Dashboard DOM loaded');
+      document.getElementById('add-nft-btn').addEventListener('click', addNFT);
+    });
+  </script>
+</body>
+</html>
