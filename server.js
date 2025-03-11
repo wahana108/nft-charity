@@ -8,9 +8,13 @@ const port = process.env.PORT || 3001; // Vercel akan set port otomatis
 const supabaseUrl = 'https://jmqwuaybvruzxddsppdh.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptcXd1YXlidnJ1enhkZHNwcGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0MTUxNzEsImV4cCI6MjA1NTk5MTE3MX0.ldNdOrsb4BWyFRwZUqIFEbmU0SgzJxiF_Z7eGZPKZJg';
 const supabase = createClient(supabaseUrl, supabaseKey);
-
-// Middleware untuk parsing JSON dan melayani file statis
 app.use(express.json());
+// Tambahkan middleware untuk X-Frame-Options
+app.use((req, res, next) => {
+  res.setHeader('X-Frame-Options', 'ALLOW-FROM https://nft-main-eight.vercel.app');
+  next();
+});
+// Middleware untuk parsing JSON dan melayani file statis
 app.use(express.static(path.join(__dirname, 'public'))); // Pastikan path ke public benar
 
 // Route untuk root URL
