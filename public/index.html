@@ -7,9 +7,29 @@
   <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://nft-charity-eight.vercel.app https://nft-buy-eight.vercel.app;">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net 'sha256-yCP97QDaK3N0IPMGj60YtfntFdQCNvAYcknsiRIE9xo=';">
+  <!-- Tambahkan di dalam <head> untuk CSS -->
+<style>
+  .back-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 10px;
+  }
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.min.js"></script>
 </head>
 <body>
+  <!-- Ganti tombol Back dengan elemen <a> -->
+  <div style="text-align: center;">
+    <a href="https://https://nft-main-bice.vercel.app" class="back-button">Back</a>
+  </div>
   <div id="login-form">
     <h2>Login</h2>
     <input type="email" id="email" placeholder="Email" autocomplete="email"><br>
