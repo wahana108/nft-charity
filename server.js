@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey, {
 });
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const authenticate = async (req, res, next) => {
   const token = req.headers.authorization;
