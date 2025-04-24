@@ -3,35 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>NFT Charity - Explore</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net https://*.supabase.com https://*.supabase.co 'unsafe-inline'; connect-src 'self' https://oqquvpjikdbjlagdlbhp.supabase.co; img-src 'self' data: https://*.supabase.co;">
   <link rel="stylesheet" href="style.css">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net https://cdn.supabase.com;">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net 'sha256-yCP97QDaK3N0IPMGj60YtfntFdQCNvAYcknsiRIE9xo=';">
-  <!-- Tambahkan di dalam <head> untuk CSS -->
-<style>
-  .back-button {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    margin: 10px;
-  }
-  .back-button:hover {
-    background-color: #0056b3;
-  }
-</style>
-
+  <link rel="icon" href="favicon.ico">
+  <style>
+    .back-button {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      margin: 10px;
+    }
+    .back-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.min.js"></script>
 </head>
 <body>
-  <!-- Tambahkan di dalam <body>, tepat setelah tag pembuka <body> -->
-<div style="text-align: center;">
-  <button id="back-to-mastermind" class="back-button">Back</button>
-</div>
-
-  
+  <div style="text-align: center;">
+    <button id="back-to-mastermind" class="back-button">Back</button>
+  </div>
   <div id="login-form">
     <h2>Login</h2>
     <input type="email" id="email" placeholder="Email" autocomplete="email"><br>
@@ -51,12 +45,11 @@
     <nav>
       <a href="/dashboard.html">Dashboard</a> | <button id="logout-btn">Logout</button>
     </nav>
-    <!-- Tambahkan input pencarian -->
     <div class="search-bar">
       <input type="text" id="nft-search" placeholder="Search by title...">
     </div>
     <div id="nft-list"></div>
   </div>
-  <script src="/script.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91e10868c807bd2d',t:'MTc0MTU5MTA1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  <script src="script.js"></script>
+</body>
 </html>
